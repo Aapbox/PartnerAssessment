@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<meta name="theme-color" content="#fdf6ee"/>
+<title>The Marriage Mirror — Psychometric Assessment</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --cream:    #fdf6ee;
+  --cream2:   #faf0e4;
+  --cream3:   #f4e8d6;
+  --warm:     #efe5d4;
+  --border:   #e2d4c0;
+  --border2:  #d4c2a8;
+  --text:     #2c2118;
+  --text2:    #5a4535;
+  --muted:    #9a8070;
+  --faint:    #f0e6d8;
+  --rose:     #c0524f;
+  --rosebg:   #fdf0ef;
+  --gold:     #b07d3a;
+  --goldbg:   #fef8ec;
+  --green:    #3a7a52;
+  --greenbg:  #f0f8f3;
+  --orange:   #d4742a;
+  --orangebg: #fef4ec;
+  --blue:     #3a6fa0;
+  --bluebg:   #eef5fc;
+  --purple:   #7050a0;
+  --purplebg: #f5f0fc;
+  --teal:     #2a8070;
+  --tealbg:   #eef8f5;
+  --red:      #c03030;
+  --redbg:    #fef0f0;
+  --amber:    #c08030;
+  --amberbg:  #fef8ec;
+  --shadow:   0 2px 16px rgba(100,60,20,0.08);
+  --shadow2:  0 4px 32px rgba(100,60,20,0.12);
+}
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html { scroll-behavior:smooth; font-size:16px; }
+body {
+  background: var(--cream);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── PAGES ── */
+.page { display:none; }
+.page.active { display:block; }
+
+/* ══════════════════════════════
+   INTRO
+══════════════════════════════ */
+#intro {
+  min-height: 100vh;
+  background: linear-gradient(165deg, #fdf6ee 0%, #f8ede0 40%, #fdf0e4 100%);
+  display: flex; align-items: center; justify-content: center;
+  padding: 48px 20px;
+  position: relative; overflow: hidden;
+}
+#intro::before {
+  content: '';
+  position: absolute; top: -120px; right: -120px;
+  width: 500px; height: 500px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(176,125,58,0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+#intro::after {
+  content: '';
+  position: absolute; bottom: -80px; left: -80px;
+  width: 360px; height: 360px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(192,82,79,0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+.intro-inner {
+  max-width: 580px; width: 100%;
+  text-align: center; position: relative; z-index: 1;
+}
+.badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--goldbg);
+  border: 1px solid rgba(176,125,58,0.3);
+  color: var(--gold);
+  font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase;
+  padding: 7px 16px; border-radius: 24px;
+  margin-bottom: 28px; font-weight: 500;
+}
+.intro-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 7vw, 60px);
+  font-weight: 400; font-style: italic;
+  line-height: 1.12; color: var(--text);
+  margin-bottom: 8px;
+}
+.intro-title .accent { color: var(--gold); }
+.divider {
+  width: 48px; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--border2), transparent);
+  margin: 20px auto;
+}
+.intro-desc {
+  font-size: 15px; color: var(--text2); line-height: 1.85;
+  font-weight: 300; margin-bottom: 32px; max-width: 460px; margin-left: auto; margin-right: auto;
+}
+.cat-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 8px; margin-bottom: 32px;
+}
+@media(max-width: 440px) { .cat-grid { grid-template-columns: repeat(2, 1fr); } }
+.cat-chip {
+  background: white; border: 1px solid var(--border);
+  border-radius: 10px; padding: 10px 6px; text-align: center;
+  box-shadow: var(--shadow);
+}
+.cat-chip .ico { font-size: 18px; margin-bottom: 4px; }
+.cat-chip .lbl {
+  font-size: 8.5px; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--muted); line-height: 1.4;
+}
+.form-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 26px; }
+.form-row { display: flex; gap: 10px; }
+.form-row > * { flex: 1; min-width: 0; }
+input, select {
+  background: white; border: 1.5px solid var(--border);
+  border-radius: 10px; padding: 13px 16px;
+  color: var(--text); font-size: 14px;
+  font-family: 'DM Sans', sans-serif; font-weight: 400;
+  outline: none; width: 100%;
+  -webkit-appearance: none; appearance: none;
+  transition: border-color .2s, box-shadow .2s;
+  box-shadow: var(--shadow);
+}
+input:focus, select:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(176,125,58,0.1);
+}
+input::placeholder { color: var(--muted); }
+select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239a8070' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 14px center; padding-right: 38px; }
+select option { color: var(--text); }
+.btn-start {
+  background: linear-gradient(135deg, #c4863e, #a0562a);
+  border: none; color: white;
+  padding: 16px 52px; border-radius: 50px;
+  font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+  font-family: 'DM Sans', sans-serif; font-weight: 500;
+  cursor: pointer; width: 100%; max-width: 320px;
+  box-shadow: 0 4px 24px rgba(176,125,58,0.35);
+  transition: transform .2s, box-shadow .2s;
+  -webkit-appearance: none;
+}
+.btn-start:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(176,125,58,0.4); }
+.btn-start:active { transform: translateY(0); }
+.hint-text {
+  margin-top: 12px; font-size: 11px;
+  color: var(--muted); letter-spacing: 1.5px;
+}
+
+/* ══════════════════════════════
+   QUESTION PAGE
+══════════════════════════════ */
+#question {
+  min-height: 100vh;
+  background: var(--cream);
+  display: flex; flex-direction: column;
+  align-items: center;
+  padding: 0;
+}
+.q-topbar {
+  width: 100%; position: sticky; top: 0; z-index: 10;
+  background: rgba(253,246,238,0.95);
+  backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 20px 10px;
+}
+.q-topbar-inner {
+  max-width: 640px; margin: 0 auto;
+}
+.q-meta {
+  display: flex; justify-content: space-between;
+  align-items: center; margin-bottom: 8px; gap: 8px;
+}
+.q-cat-label { display: flex; align-items: center; gap: 6px; }
+.q-cat-label .ico { font-size: 15px; }
+.q-cat-label .name {
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--muted); font-weight: 500;
+}
+.q-cat-label .sub {
+  font-size: 9px; padding: 2px 7px; border-radius: 6px;
+  font-weight: 500;
+}
+.q-num { font-size: 11px; color: var(--muted); font-weight: 400; }
+.progress-bar {
+  height: 4px; background: var(--warm);
+  border-radius: 2px; overflow: hidden;
+}
+.progress-fill {
+  height: 100%; border-radius: 2px;
+  transition: width .4s ease;
+  background: linear-gradient(90deg, #c4863e, #a04040);
+}
+.q-body {
+  flex: 1; width: 100%; max-width: 640px;
+  padding: 28px 20px 20px;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.q-card {
+  background: white;
+  border: 1.5px solid var(--border);
+  border-radius: 16px; padding: 28px 24px;
+  box-shadow: var(--shadow2);
+  transition: opacity .22s;
+}
+.q-card.fading { opacity: 0; }
+.q-text {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(16px, 4vw, 20px);
+  font-style: italic; font-weight: 400;
+  color: var(--text); line-height: 1.75;
+}
+.q-instructions {
+  font-size: 11px; color: var(--muted);
+  letter-spacing: .5px; text-align: center; padding: 2px 0 4px;
+}
+.options { display: flex; flex-direction: column; gap: 9px; }
+.opt-btn {
+  background: white; border: 1.5px solid var(--border);
+  border-radius: 12px; padding: 14px 18px;
+  color: var(--text2); font-size: 14px; font-weight: 400;
+  font-family: 'DM Sans', sans-serif;
+  cursor: pointer; text-align: left;
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 12px;
+  transition: all .18s ease;
+  box-shadow: 0 1px 4px rgba(100,60,20,0.06);
+  -webkit-appearance: none; min-height: 52px;
+}
+.opt-btn:hover { border-color: var(--gold); background: var(--goldbg); color: var(--text); }
+.opt-btn:active { transform: scale(0.98); }
+.opt-label { flex: 1; }
+.opt-indicator {
+  width: 22px; height: 22px; border-radius: 50%;
+  border: 2px solid var(--border2);
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  transition: all .18s;
+}
+.opt-btn:hover .opt-indicator { border-color: var(--gold); background: var(--goldbg); }
+.q-footer {
+  padding: 8px 20px 24px; max-width: 640px; width: 100%;
+}
+.back-btn {
+  background: transparent; border: none;
+  color: var(--muted); font-family: 'DM Sans', sans-serif;
+  font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase;
+  cursor: pointer; padding: 8px 0; display: flex; align-items: center; gap: 6px;
+  transition: color .2s; font-weight: 400;
+}
+.back-btn:hover { color: var(--text2); }
+
+/* ══════════════════════════════
+   RESULTS
+══════════════════════════════ */
+#results {
+  background: var(--cream);
+  padding: 0 0 60px;
+  opacity: 0; transition: opacity .8s ease;
+}
+#results.visible { opacity: 1; }
+
+.results-header {
+  background: linear-gradient(165deg, #fdf6ee, #f8ece0);
+  border-bottom: 1px solid var(--border);
+  padding: 48px 20px 36px; text-align: center;
+}
+.r-supertitle {
+  font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--gold); font-weight: 500; margin-bottom: 12px;
+}
+.r-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(26px, 5vw, 44px); font-weight: 400; font-style: italic;
+  color: var(--text); margin-bottom: 6px;
+}
+.r-divider {
+  width: 48px; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--border2), transparent);
+  margin: 16px auto 0;
+}
+
+.results-inner { max-width: 800px; margin: 0 auto; padding: 0 16px; }
+
+/* Hero score card */
+.score-hero {
+  background: white; border: 1.5px solid var(--border);
+  border-radius: 20px; padding: 36px 28px;
+  margin: 28px 0 20px; text-align: center;
+  box-shadow: var(--shadow2); position: relative; overflow: hidden;
+}
+.score-hero::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  background: linear-gradient(90deg, #c4863e, #c04040, #8050a0);
+}
+.score-emoji { font-size: 48px; margin-bottom: 8px; }
+.score-number {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(52px, 10vw, 88px); font-weight: 700;
+  line-height: 1;
+}
+.score-grade {
+  font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+  font-weight: 500; margin: 10px 0 3px;
+}
+.score-sub {
+  font-size: 13px; color: var(--muted); font-style: italic; margin-bottom: 20px;
+}
+.score-sep { width: 48px; height: 1px; background: var(--border); margin: 0 auto 20px; }
+.score-narrative {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(14px, 2.5vw, 16px);
+  color: var(--text2); line-height: 1.9;
+  max-width: 620px; margin: 0 auto; font-weight: 400;
+}
+
+/* Category score grid */
+.cat-score-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px; margin-bottom: 20px;
+}
+@media(max-width: 400px) { .cat-score-grid { grid-template-columns: repeat(2, 1fr); } }
+.cat-score-card {
+  background: white; border: 1.5px solid var(--border);
+  border-radius: 14px; padding: 16px 10px;
+  display: flex; flex-direction: column; align-items: center; gap: 5px;
+  box-shadow: var(--shadow);
+}
+.cat-score-card.warn { border-color: #e8b0ae; background: #fffafa; }
+.cat-score-ico { font-size: 20px; }
+.cat-score-lbl {
+  font-size: 9px; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--muted); text-align: center; line-height: 1.4;
+}
+.cat-score-grade { font-size: 10px; font-weight: 500; letter-spacing: .5px; }
+
+/* Warning */
+.warning-box {
+  background: #fff5f5; border: 1.5px solid #f0c0be;
+  border-left: 4px solid var(--red);
+  border-radius: 14px; padding: 22px 20px; margin: 8px 0 20px;
+}
+.warning-title {
+  font-family: 'Playfair Display', serif; font-size: 18px;
+  font-style: italic; color: var(--red); margin-bottom: 10px; font-weight: 400;
+}
+.warning-text { font-size: 14px; color: var(--text2); line-height: 1.8; }
+.warning-text b { color: var(--red); }
+
+/* Section title */
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(22px, 4vw, 30px); font-weight: 400; font-style: italic;
+  color: var(--text); text-align: center; margin: 36px 0 18px;
+}
+
+/* Dimension panels */
+.dim-panel {
+  background: white; border: 1.5px solid var(--border);
+  border-left: 4px solid; border-radius: 14px;
+  padding: 20px 18px; margin-bottom: 10px;
+  box-shadow: var(--shadow);
+}
+.dim-head {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: 12px; gap: 8px; flex-wrap: wrap;
+}
+.dim-left { display: flex; align-items: center; gap: 10px; }
+.dim-left .ico { font-size: 20px; flex-shrink: 0; }
+.dim-name {
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--text); font-weight: 500;
+}
+.dim-grade-lbl { font-size: 11px; font-weight: 400; margin-top: 2px; }
+.dim-right {
+  display: flex; align-items: center; gap: 8px; flex-shrink: 0;
+}
+.mini-bar {
+  height: 5px; width: 80px; background: var(--warm);
+  border-radius: 3px; overflow: hidden;
+}
+@media(max-width: 400px) { .mini-bar { width: 60px; } }
+.mini-fill { height: 100%; border-radius: 3px; transition: width 1.2s ease; }
+.dim-pct { font-size: 13px; font-weight: 600; min-width: 36px; text-align: right; }
+.dim-text {
+  font-size: 14px; color: var(--text2); line-height: 1.85;
+  font-family: 'DM Sans', sans-serif;
+}
+
+/* Action plan */
+.action-box {
+  background: linear-gradient(135deg, #fffbf5, #fff8f0);
+  border: 1.5px solid #e8d4b8;
+  border-radius: 18px; padding: 26px 22px; margin: 28px 0;
+  box-shadow: var(--shadow);
+}
+.action-title {
+  font-family: 'Playfair Display', serif; font-size: 22px;
+  font-style: italic; color: var(--text); margin-bottom: 4px;
+}
+.action-sub {
+  font-size: 10px; color: var(--muted); letter-spacing: 2px;
+  text-transform: uppercase; margin-bottom: 20px;
+}
+.action-item {
+  display: flex; gap: 14px; align-items: flex-start;
+  padding: 16px 0; border-bottom: 1px solid var(--border);
+}
+.action-item:last-child { border-bottom: none; padding-bottom: 0; }
+.action-ico {
+  border-radius: 50%; width: 38px; height: 38px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; border: 1.5px solid;
+}
+.action-cat {
+  font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+  font-weight: 500; margin-bottom: 5px;
+}
+.action-text { font-size: 14px; color: var(--text2); line-height: 1.8; }
+
+/* Closing */
+.closing {
+  text-align: center; padding: 20px 20px 10px;
+}
+.closing-quote {
+  font-family: 'Playfair Display', serif; font-size: 15px;
+  font-style: italic; color: var(--muted);
+  line-height: 1.85; max-width: 500px; margin: 0 auto 24px;
+}
+.btn-ghost {
+  background: white; border: 1.5px solid var(--border2);
+  color: var(--text2); padding: 12px 32px; border-radius: 50px;
+  font-size: 11px; font-family: 'DM Sans', sans-serif; letter-spacing: 2.5px;
+  text-transform: uppercase; cursor: pointer;
+  transition: all .2s; box-shadow: var(--shadow);
+  -webkit-appearance: none;
+}
+.btn-ghost:hover { border-color: var(--gold); color: var(--gold); background: var(--goldbg); }
+
+/* Radial SVG light */
+.radial-track { stroke: var(--warm); }
+.radial-text-light { fill: var(--text); }
+
+/* Animations */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.a1 { animation: fadeUp .5s .05s ease both; }
+.a2 { animation: fadeUp .5s .15s ease both; }
+.a3 { animation: fadeUp .5s .25s ease both; }
+.a4 { animation: fadeUp .5s .35s ease both; }
+.a5 { animation: fadeUp .5s .45s ease both; }
+
+/* Mobile tweaks */
+@media(max-width: 480px) {
+  .score-hero { padding: 28px 18px; }
+  .dim-panel { padding: 16px 14px; }
+  .action-box { padding: 20px 16px; }
+  .q-card { padding: 22px 18px; }
+  .opt-btn { padding: 13px 14px; font-size: 13px; }
+  .btn-start { padding: 15px 36px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════  INTRO  ═══════════════ -->
+<div id="intro" class="page active">
+  <div class="intro-inner">
+    <div class="a1"><div class="badge">💍 Marriage Psychometric · Ages 30–50</div></div>
+    <div class="a2">
+      <h1 class="intro-title">The Marriage<br/><span class="accent">Mirror</span> Assessment</h1>
+    </div>
+    <div class="divider a2"></div>
+    <div class="a3">
+      <p class="intro-desc">
+        A 50-question psychometric profile examining eight dimensions of your marriage — loyalty, commitment, emotional maturity, how you handle tough phases, financial partnership, and the small joys that hold a family together.
+      </p>
+    </div>
+    <div class="cat-grid a3" id="catChips"></div>
+    <div class="form-group a4">
+      <input type="text" id="nameInput" placeholder="Your first name (optional)" autocomplete="given-name"/>
+      <div class="form-row">
+        <select id="genderInput">
+          <option value="">I identify as…</option>
+          <option value="male">Male (Husband)</option>
+          <option value="female">Female (Wife)</option>
+          <option value="other">Other</option>
+        </select>
+        <select id="yearsInput">
+          <option value="">Years married…</option>
+          <option>1–2 years</option><option>3–5 years</option>
+          <option>6–10 years</option><option>11–15 years</option>
+          <option>16–20 years</option><option>21–25 years</option><option>26+ years</option>
+        </select>
+      </div>
+      <select id="ageInput">
+        <option value="">Your age range…</option>
+        <option>30–34</option><option>35–39</option>
+        <option>40–44</option><option>45–50</option>
+      </select>
+    </div>
+    <div class="a5" style="text-align:center">
+      <button class="btn-start" onclick="startTest()">Begin Assessment</button>
+      <p class="hint-text">50 QUESTIONS &nbsp;·&nbsp; ~8 MINUTES &nbsp;·&nbsp; PRIVATE</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════  QUESTION  ═══════════════ -->
+<div id="question" class="page">
+  <div class="q-topbar">
+    <div class="q-topbar-inner">
+      <div class="q-meta">
+        <div class="q-cat-label">
+          <span class="ico" id="qCatIco"></span>
+          <span class="name" id="qCatName"></span>
+          <span class="sub" id="qCatSub"></span>
+        </div>
+        <span class="q-num" id="qNum"></span>
+      </div>
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+    </div>
+  </div>
+  <div class="q-body">
+    <div class="q-card" id="qCard">
+      <p class="q-text" id="qText"></p>
+    </div>
+    <p class="q-instructions">Tap the answer that best reflects you</p>
+    <div class="options" id="optionsList"></div>
+  </div>
+  <div class="q-footer">
+    <button class="back-btn" id="backBtn" onclick="goBack()">← Previous question</button>
+  </div>
+</div>
+
+<!-- ═══════════════  RESULTS  ═══════════════ -->
+<div id="results" class="page">
+  <div class="results-header">
+    <div class="r-supertitle" id="rSuper">Marriage Mirror Report</div>
+    <h1 class="r-title" id="rTitle">Your Marital Profile</h1>
+    <div class="r-divider"></div>
+  </div>
+  <div class="results-inner">
+    <div class="score-hero" id="scoreHero"></div>
+    <div class="cat-score-grid" id="catScoreGrid"></div>
+    <div id="warningBox"></div>
+    <div class="section-title">Dimension-by-Dimension Analysis</div>
+    <div id="dimPanels"></div>
+    <div class="action-box" id="actionBox"></div>
+    <div class="closing">
+      <p class="closing-quote">"A great marriage is not when the perfect couple comes together — it is when an imperfect couple learns to enjoy their differences."</p>
+      <button class="btn-ghost" onclick="resetTest()">↺ Retake Assessment</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ════════════  DATA  ════════════ */
+const CATEGORIES = {
+  loyalty:      { label:'Marital Loyalty',               icon:'🔐', accent:'#7050a0', bg:'#f5f0fc', textc:'#7050a0' },
+  commitment:   { label:'Commitment',                    icon:'💍', accent:'#3a6fa0', bg:'#eef5fc', textc:'#3a6fa0' },
+  adapting:     { label:'Flexibility & Empathy',         icon:'🌿', accent:'#3a7a52', bg:'#f0f8f3', textc:'#3a7a52' },
+  personality:  { label:'Emotional Maturity',            icon:'🧠', accent:'#d4742a', bg:'#fef4ec', textc:'#d4742a' },
+  happiness:    { label:'Spouse Happiness',              icon:'💛', accent:'#b07d3a', bg:'#fef8ec', textc:'#b07d3a' },
+  financial:    { label:'Financial Partnership',         icon:'⚖️', accent:'#2a8070', bg:'#eef8f5', textc:'#2a8070' },
+  tough:        { label:'Effort in Tough Times',         icon:'🔥', accent:'#c03030', bg:'#fef0f0', textc:'#c03030' },
+  celebrations: { label:'Joy & Family Celebrations',     icon:'🎉', accent:'#c08030', bg:'#fef8ec', textc:'#c08030' },
+};
+
+const QUESTIONS = [
+  {id:1,  cat:'loyalty',      text:'When family or close friends criticize your spouse, you firmly defend them — even if you privately agree with parts of the criticism.'},
+  {id:2,  cat:'loyalty',      text:'You have never seriously considered ending the marriage during difficult or frustrating periods.'},
+  {id:3,  cat:'loyalty',      text:'Your spouse\'s personal vulnerabilities and struggles remain strictly confidential — never shared with friends, family, or colleagues.'},
+  {id:4,  cat:'loyalty',      text:'You ensure your spouse never has genuine reason to doubt your emotional or physical faithfulness.'},
+  {id:5,  cat:'loyalty',      text:'You avoid emotionally intimate friendships outside the marriage that could create inappropriate closeness or dependency.'},
+  {id:6,  cat:'loyalty',      text:'Even during long work trips or family events, you stay emotionally present and consistently check in with your spouse.'},
+  {id:7,  cat:'commitment',   text:'When conflicts escalate, you choose to stay and resolve them rather than withdraw, go silent, or threaten to leave.'},
+  {id:8,  cat:'commitment',   text:'You actively invest in the marriage — through quality time and genuine conversations — even after many years together.'},
+  {id:9,  cat:'commitment',   text:'You have made meaningful personal sacrifices — in career, habits, or lifestyle — for the marriage without sustained resentment.'},
+  {id:10, cat:'commitment',   text:'You consistently follow through on commitments made to your spouse — from significant promises to small everyday agreements.'},
+  {id:11, cat:'commitment',   text:'You view the marriage as a living priority requiring consistent effort — not something that takes care of itself once established.'},
+  {id:12, cat:'commitment',   text:'When you sense distance growing between you and your spouse, you take the initiative to bridge that gap rather than waiting for them to act first.'},
+  {id:13, cat:'adapting',     text:'When your spouse requests a change in your behavior, you make a genuine sustained effort — not just a brief token adjustment.'},
+  {id:14, cat:'adapting',     text:'You have meaningfully adjusted your lifestyle or social habits to align with what works best for your family.'},
+  {id:15, cat:'adapting',     text:'When planning family decisions — vacations, finances, home changes — you give your spouse\'s preferences genuine equal weight.'},
+  {id:16, cat:'adapting',     text:'You adapt your communication tone and style based on your spouse\'s emotional state in the moment.'},
+  {id:17, cat:'adapting',     text:'You have genuinely let go of habits or patterns your spouse found harmful to the marriage — without bringing them back or resenting it.'},
+  {id:18, cat:'adapting',     text:'You relate to who your spouse is now — not who they were years ago — adapting to how they have grown and changed.'},
+  {id:19, cat:'personality',  text:'When stressed or exhausted from work, you manage not to take it out on your spouse or create a hostile atmosphere at home.'},
+  {id:20, cat:'personality',  text:'You express genuine appreciation and warmth toward your spouse regularly — in ordinary daily moments, not just on special occasions.'},
+  {id:21, cat:'personality',  text:'You are emotionally available and genuinely engaged during conversations — not just physically present while mentally elsewhere.'},
+  {id:22, cat:'personality',  text:'When conflicts arise, you take clear ownership of your role without deflecting blame, dismissing concerns, or reactivating past grievances.'},
+  {id:23, cat:'personality',  text:'You treat your spouse with consistent courtesy and respect — the same way you would speak to a valued colleague or close friend.'},
+  {id:24, cat:'personality',  text:'You are mindful of your tone, body language, and words during difficult conversations — not allowing frustration to turn into rudeness.'},
+  {id:25, cat:'happiness',    text:'You notice and proactively respond to your spouse\'s emotional state even before they express it in words.'},
+  {id:26, cat:'happiness',    text:'You actively support your spouse\'s individual goals, career ambitions, and personal dreams outside of the marriage.'},
+  {id:27, cat:'happiness',    text:'During stressful periods, you voluntarily take on extra household or family responsibilities to ease your spouse\'s load.'},
+  {id:28, cat:'happiness',    text:'You celebrate your spouse\'s wins and milestones with visible, genuine enthusiasm — not just polite acknowledgment.'},
+  {id:29, cat:'happiness',    text:'Maintaining your spouse\'s daily emotional well-being and sense of security is a genuine ongoing priority for you.'},
+  {id:30, cat:'happiness',    text:'You check in on your spouse\'s happiness regularly — not just when they show visible signs of distress or unhappiness.'},
+  {id:31, cat:'financial',    text:'Major financial decisions — property, investments, large purchases, career shifts — are always made jointly and with full transparency.'},
+  {id:32, cat:'financial',    text:'You are fully honest about your income, savings, debts, and spending habits — with no hidden accounts or concealed financial activity.'},
+  {id:33, cat:'financial',    text:'You and your spouse have genuinely aligned on a shared financial vision covering retirement, children\'s education, and long-term security.'},
+  {id:34, cat:'financial',    text:'You resist impulsive or self-focused spending that could strain your family\'s finances or create unnecessary tension in the marriage.'},
+  {id:35, cat:'financial',    text:'When financial stress arises, you approach it as a true team — problem-solving collaboratively rather than assigning blame.'},
+  {id:36, cat:'financial',    text:'You actively consider your spouse\'s sense of financial security and comfort when making financial decisions — not only your own preference.'},
+  {id:37, cat:'tough',        text:'During periods when the marriage has been strained, you have taken deliberate steps to repair the relationship — rather than waiting passively.'},
+  {id:38, cat:'tough',        text:'When you have spoken harshly or rudely to your spouse, you acknowledge it sincerely and work to genuinely change the pattern — not simply apologize and repeat it.'},
+  {id:39, cat:'tough',        text:'You are willing to honestly examine your own role in marital problems without making your spouse solely responsible for the difficulties.'},
+  {id:40, cat:'tough',        text:'Even when your own needs are unmet, you continue to show up with care and respect for your spouse rather than withdrawing or retaliating.'},
+  {id:41, cat:'tough',        text:'When the marriage feels strained, you choose to invest more rather than less — recognizing that effort matters most precisely when it is hardest to give.'},
+  {id:42, cat:'tough',        text:'You avoid using financial control, emotional coldness, or harsh criticism as tools of power or punishment during conflict.'},
+  {id:43, cat:'tough',        text:'You have actively sought help for the marriage — through counselling, honest self-reflection, or trusted guidance — rather than letting problems grow unaddressed.'},
+  {id:44, cat:'celebrations', text:'You make your spouse\'s birthday a genuinely special occasion — with thoughtful planning and personal effort that shows you care beyond just the date.'},
+  {id:45, cat:'celebrations', text:'You actively participate in and contribute to family festivals, religious observances, and cultural traditions that matter to your household.'},
+  {id:46, cat:'celebrations', text:'You plan and look forward to weekend activities as a family — creating quality shared experiences rather than retreating to your own space or screens.'},
+  {id:47, cat:'celebrations', text:'You spend willingly and generously on experiences that bring your family genuine happiness — outings, festivals, treats — without always calculating cost first.'},
+  {id:48, cat:'celebrations', text:'You remember and warmly acknowledge the small occasions that matter to your spouse — anniversaries, personal milestones, small achievements.'},
+  {id:49, cat:'celebrations', text:'You create spontaneous moments of joy in family life — surprising your spouse or children with unplanned treats, outings, or thoughtful gestures.'},
+  {id:50, cat:'celebrations', text:'Your family\'s sense of togetherness, warmth, and shared joy is something you actively protect and nurture — not something you leave to chance.'},
+];
+
+const OPTIONS = [
+  { label:'Strongly Agree',    value:5 },
+  { label:'Agree',             value:4 },
+  { label:'Sometimes',         value:3 },
+  { label:'Disagree',          value:2 },
+  { label:'Strongly Disagree', value:1 },
+];
+
+function grade(s) {
+  if (s>=88) return {g:'Exceptional',    c:'#2a7a40', e:'🏆', sub:'A rare and deeply admirable partner'};
+  if (s>=75) return {g:'Strong',          c:'#3a6fa0', e:'💚', sub:'A committed and caring spouse'};
+  if (s>=62) return {g:'Developing',      c:'#c08030', e:'🌱', sub:'A solid foundation with clear room to grow'};
+  if (s>=48) return {g:'Needs Attention', c:'#d4742a', e:'🔶', sub:'Important patterns require honest attention'};
+  return      {g:'At Risk',       c:'#c03030', e:'⚠️',  sub:'Significant challenges need urgent reflection'};
+}
+
+const INSIGHTS = {
+  loyalty:{
+    h:'Your loyalty is unconditional and active — you create an environment where your spouse feels completely safe and protected. In marriages navigating the pressures of the 30s–50s, this steadfast quality is your single greatest relational asset.',
+    m:'You are generally loyal, but there are edges — perhaps oversharing with family, venting to the wrong people, or mentally drifting during rough patches. Loyalty is not just the absence of betrayal; it is a daily active choice to protect and prioritize your spouse.',
+    l:'Loyalty appears to be a genuine struggle. Your spouse may feel insecure about your commitment in its fullest sense. Rebuilding loyalty begins with an honest audit of where you have fallen short — and a visible, sustained change in behavior.'
+  },
+  commitment:{
+    h:'You embody committed partnership. You don\'t treat marriage as a destination — you treat it as an ongoing practice. This mindset is what separates marriages that deepen over time from those that quietly stagnate or collapse.',
+    m:'Your commitment is sincere but can become passive. You are present in the marriage but not always actively investing in it. Years of low investment accumulate into emotional distance. The antidote is deliberate reconnection — not grand gestures, but consistent small ones.',
+    l:'Your commitment is showing serious cracks. This may stem from accumulated resentment, unmet needs, or years of neglect. A marriage cannot sustain itself on intention alone. Without visible action — and possibly professional support — this gap will continue to widen.'
+  },
+  adapting:{
+    h:'Your flexibility is one of your finest qualities as a spouse. You meet the inevitable clashes of two people evolving over decades with grace, not rigidity. This adaptability is the secret ingredient in marriages that stay alive and joyful.',
+    m:'You adapt when stakes are high but resist in everyday friction points. Over years, these small rigidities compound. Your spouse may feel like they are always the one adjusting. Consistent, low-stakes flexibility is what builds the deepest trust.',
+    l:'Inflexibility is creating real distance. Both partners change significantly across the 30s–50s. Clinging to old patterns communicates that your comfort outweighs your spouse\'s growth. Meeting your spouse where they are today is essential.'
+  },
+  personality:{
+    h:'Your emotional maturity is a genuine gift to the marriage. You regulate yourself under pressure, communicate with care, and show up as a grounded presence. Over decades, this quality compounds into the bedrock of genuine emotional safety.',
+    m:'You have good intentions but patterns of reactivity or emotional unavailability likely surface during stress. These are extremely common — and absolutely changeable. Naming your patterns honestly with your spouse is the most powerful first step.',
+    l:'Your behavioral patterns at home — harshness, emotional withdrawal, dismissiveness, or disrespectful communication — are causing real damage. These are not fixed personality traits. They are habits that can change, but only with sustained honest effort and professional support.'
+  },
+  happiness:{
+    h:'You are a profoundly attuned spouse. You love your partner not just in principle but in daily practice — in the quiet attention to what makes them feel alive and valued. This kind of love deepens with every year.',
+    m:'You care about your spouse\'s happiness but life\'s demands may have pushed it down your priority list. Assuming your spouse is fine because they haven\'t complained is a common and costly trap. Proactive daily attention transforms a marriage.',
+    l:'Your spouse\'s day-to-day emotional well-being is not receiving the attention it urgently needs. They may feel invisible or profoundly alone inside this marriage. This is one of the most common drivers of marital breakdown in the 40s and 50s.'
+  },
+  financial:{
+    h:'Financial partnership is a genuine strength. You\'ve built real trust around money — one of the top three sources of conflict at this life stage. Your transparency and collaborative approach create the security that lets both partners breathe freely.',
+    m:'You cooperate financially in broad terms but may avoid difficult money conversations or carry unspoken assumptions. In the 30s–50s, when mortgages, retirement, and education costs collide, financial misalignment becomes acutely stressful.',
+    l:'Financial secrecy, unilateral decisions, or using money as a form of control are causing serious trust damage. Financial conflicts at this life stage feel existential — because they often are. Radical transparency and possibly a financial counsellor are necessary steps.'
+  },
+  tough:{
+    h:'You demonstrate real courage in how you show up during the marriage\'s difficult phases. Rather than retreating or hardening, you lean in. This willingness to do the hard work precisely when it costs the most is what makes marriages resilient.',
+    m:'You make some effort during tough times but inconsistency undermines genuine repair. Apologies without behavioral change are perceived as manipulation over time. Sustained, visible effort — not just words — is what rebuilds trust during difficult periods.',
+    l:'During the marriage\'s most challenging periods, your response appears to have been withdrawal, harshness, emotional coldness, or using finances as leverage. These responses are actively damaging the foundation. The marriage needs you to show up very differently — starting now.'
+  },
+  celebrations:{
+    h:'You are a builder of family joy. You understand that a marriage\'s health is measured not only in how it handles crisis — but in how it manufactures delight and warmth during ordinary life. Birthdays matter. Festivals are real. Your family deeply feels this.',
+    m:'You participate in celebrations but perhaps without full engagement or generosity of spirit. Your family notices the half-heartedness even without saying so. The return on investment in joy — a thoughtful birthday, a festival properly celebrated — is extraordinarily high in any long marriage.',
+    l:'Family celebrations, joyful occasions, and shared leisure are receiving minimal investment from you — financially, emotionally, or practically. A money-minded, obligation-only approach to birthdays, festivals, and weekends tells your spouse and children that joy is not a priority in this home.'
+  }
+};
+
+const RECS = {
+  loyalty:      'Practice "Private Advocacy" weekly: identify one moment where you chose to protect your spouse instead of venting about them. Tell them. This small ritual builds profound, lasting trust.',
+  commitment:   'Schedule a quarterly "Marriage Check-in" — 30 focused minutes where both partners discuss what\'s working, what needs attention, and one specific commitment each will make in the coming 90 days.',
+  adapting:     'Try a "Yes Before No" month: whenever your spouse suggests something, find something genuine to agree with before evaluating it critically. Practiced consistently, flexibility becomes a natural habit.',
+  personality:  'Identify your top two emotional triggers in the marriage. Share them explicitly with your spouse. Agree on a calm signal word either partner can use when a conversation starts to escalate.',
+  happiness:    'Introduce a "What Lit You Up Today?" check-in at dinner — a 60-second daily ritual that keeps you genuinely connected to what your spouse finds joyful, meaningful, or difficult on any given day.',
+  financial:    'Schedule a monthly 90-minute "Money Date" — review spending, align on upcoming decisions, agree on one shared goal. Treat it with the same non-negotiable commitment as a medical appointment.',
+  tough:        'For one month, commit to a single rule: when things are hard, respond with one more act of care than feels natural. Sustained effort during difficulty rewires both your patterns and your spouse\'s experience of you.',
+  celebrations: 'Plan one genuinely memorable family experience per quarter — a birthday surprise, festival outing, or unplanned weekend trip. Budget for it deliberately. Investment in shared joy pays returns for years.'
+};
+
+/* ════════════  STATE  ════════════ */
+let state = {current:0, answers:{}, name:'', gender:'', years:'', age:''};
+
+/* ════════════  INIT  ════════════ */
+window.onload = () => {
+  const chips = document.getElementById('catChips');
+  Object.entries(CATEGORIES).forEach(([k,c]) => {
+    chips.innerHTML += `<div class="cat-chip"><div class="ico">${c.icon}</div><div class="lbl">${c.label}</div></div>`;
+  });
+};
+
+/* ════════════  NAVIGATION  ════════════ */
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function startTest() {
+  state.name   = document.getElementById('nameInput').value.trim();
+  state.gender = document.getElementById('genderInput').value;
+  state.years  = document.getElementById('yearsInput').value;
+  state.age    = document.getElementById('ageInput').value;
+  state.current = 0; state.answers = {};
+  showPage('question');
+  renderQuestion();
+}
+
+function goBack() {
+  if (state.current > 0) { state.current--; renderQuestion(); }
+}
+
+function resetTest() {
+  state = {current:0, answers:{}, name:'', gender:'', years:'', age:''};
+  document.getElementById('results').classList.remove('visible');
+  document.getElementById('nameInput').value = '';
+  document.getElementById('genderInput').value = '';
+  document.getElementById('yearsInput').value = '';
+  document.getElementById('ageInput').value = '';
+  showPage('intro');
+}
+
+/* ════════════  RENDER QUESTION  ════════════ */
+function renderQuestion() {
+  const q = QUESTIONS[state.current];
+  const cat = CATEGORIES[q.cat];
+  const catQs = QUESTIONS.filter(x => x.cat === q.cat);
+  const catPos = catQs.findIndex(x => x.id === q.id) + 1;
+  const pct = (Object.keys(state.answers).length / QUESTIONS.length * 100).toFixed(1);
+
+  document.getElementById('qCatIco').textContent = cat.icon;
+  document.getElementById('qCatName').textContent = cat.label;
+  const sub = document.getElementById('qCatSub');
+  sub.textContent = `${catPos}/${catQs.length}`;
+  sub.style.color = cat.accent;
+  sub.style.background = cat.bg;
+  document.getElementById('qNum').textContent = `${state.current+1} / ${QUESTIONS.length}`;
+  document.getElementById('progressFill').style.width = pct + '%';
+
+  const card = document.getElementById('qCard');
+  card.style.borderTopColor = cat.accent;
+  card.style.borderTopWidth = '3px';
+  card.classList.remove('fading');
+  document.getElementById('qText').textContent = `"${q.text}"`;
+  document.getElementById('backBtn').style.visibility = state.current > 0 ? 'visible' : 'hidden';
+
+  const opts = document.getElementById('optionsList');
+  opts.innerHTML = '';
+  OPTIONS.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.innerHTML = `<span class="opt-label">${opt.label}</span><span class="opt-indicator"></span>`;
+    btn.addEventListener('touchstart', () => {
+      btn.style.background = cat.bg;
+      btn.style.borderColor = cat.accent;
+    }, {passive:true});
+    btn.onmouseover = () => { btn.style.background = cat.bg; btn.style.borderColor = cat.accent; btn.querySelector('.opt-indicator').style.borderColor = cat.accent; btn.querySelector('.opt-indicator').style.background = cat.bg; };
+    btn.onmouseout  = () => { btn.style.background = ''; btn.style.borderColor = ''; btn.querySelector('.opt-indicator').style.borderColor = ''; btn.querySelector('.opt-indicator').style.background = ''; };
+    btn.onclick = () => answerQuestion(opt.value);
+    opts.appendChild(btn);
+  });
+}
+
+function answerQuestion(val) {
+  const q = QUESTIONS[state.current];
+  state.answers[q.id] = val;
+  const card = document.getElementById('qCard');
+  card.classList.add('fading');
+  setTimeout(() => {
+    if (state.current < QUESTIONS.length - 1) { state.current++; renderQuestion(); }
+    else buildResults();
+  }, 220);
+}
+
+/* ════════════  SCORES  ════════════ */
+function calcScores() {
+  const scores = {};
+  Object.keys(CATEGORIES).forEach(cat => {
+    const qs = QUESTIONS.filter(q => q.cat === cat);
+    const total = qs.reduce((s,q) => s + (state.answers[q.id]||0), 0);
+    scores[cat] = Math.round(total / (qs.length * 5) * 100);
+  });
+  const overall = Math.round(Object.values(scores).reduce((a,b)=>a+b,0) / Object.keys(scores).length);
+  return {scores, overall};
+}
+
+/* ════════════  BUILD RESULTS  ════════════ */
+function buildResults() {
+  showPage('results');
+  const {scores, overall} = calcScores();
+  const prof = grade(overall);
+  const fn  = state.name || 'This individual';
+  const pos = state.name ? `${state.name}'s` : 'Their';
+  const yc  = state.years ? ` After ${state.years} of marriage,` : '';
+  const parts = [state.name, state.years, state.age].filter(Boolean);
+
+  document.getElementById('rSuper').textContent = 'Marriage Mirror Report' + (parts.length ? ' · ' + parts.join(', ') : '');
+  document.getElementById('rTitle').textContent = (state.name ? `${state.name}'s` : 'Your') + ' Marital Profile';
+
+  const sorted = Object.entries(scores).sort(([,a],[,b])=>b-a);
+  const topCat = sorted[0], lowCat = sorted[sorted.length-1];
+
+  /* Hero */
+  document.getElementById('scoreHero').innerHTML = `
+    <div class="score-emoji">${prof.e}</div>
+    <div class="score-number" style="color:${prof.c}">${overall}%</div>
+    <div class="score-grade" style="color:${prof.c}">${prof.g} Partner</div>
+    <div class="score-sub">${prof.sub}</div>
+    <div class="score-sep"></div>
+    <p class="score-narrative">${buildNarrative(overall,scores,topCat,lowCat,fn,pos,yc)}</p>`;
+
+  /* Category grid */
+  const catGrid = document.getElementById('catScoreGrid');
+  catGrid.innerHTML = '';
+  Object.entries(CATEGORIES).forEach(([k,c]) => {
+    const s = scores[k], g = grade(s);
+    const r = 32, circ = 2*Math.PI*r, offset = circ-(s/100)*circ;
+    catGrid.innerHTML += `
+      <div class="cat-score-card ${s<50?'warn':''}">
+        <svg width="82" height="82" viewBox="0 0 82 82" style="overflow:visible">
+          <circle cx="41" cy="41" r="${r}" fill="none" stroke="#ede5d8" stroke-width="7"/>
+          <circle cx="41" cy="41" r="${r}" fill="none" stroke="${g.c}" stroke-width="7"
+            stroke-dasharray="${circ.toFixed(1)}" stroke-dashoffset="${offset.toFixed(1)}"
+            stroke-linecap="round" transform="rotate(-90 41 41)"
+            style="transition:stroke-dashoffset 1.2s ease"/>
+          <text x="41" y="46" text-anchor="middle" fill="${g.c}" font-size="13"
+            font-family="'Playfair Display',serif" font-weight="700">${s}%</text>
+        </svg>
+        <span class="cat-score-ico">${c.icon}</span>
+        <span class="cat-score-lbl">${c.label}</span>
+        <span class="cat-score-grade" style="color:${g.c}">${g.g}</span>
+      </div>`;
+  });
+
+  /* Warning */
+  const ts = scores['tough'], cs = scores['celebrations'];
+  let wHTML = '';
+  if (ts < 50 || cs < 50) {
+    wHTML = `<div class="warning-box"><div class="warning-title">⚠️ Marriage Health Warning</div><div class="warning-text">`;
+    if (ts < 50) wHTML += `<b>Effort in Tough Times</b> scored critically low (${ts}%). Patterns of rudeness, emotional withdrawal, or using finances as control are structural threats to the marriage. Without deliberate change, these behaviors compound. `;
+    if (cs < 50) wHTML += `<b>Joy & Celebrations</b> scored critically low (${cs}%). A money-minded, joyless approach to birthdays, festivals, and weekends drains the warmth that holds a family together. `;
+    wHTML += `This combination — difficulty during hard times <em>and</em> absence of joy during good times — creates a profoundly isolating experience for a spouse. Urgent, visible change is needed.</div></div>`;
+  }
+  document.getElementById('warningBox').innerHTML = wHTML;
+
+  /* Dimension panels */
+  const panels = document.getElementById('dimPanels');
+  panels.innerHTML = '';
+  Object.entries(CATEGORIES).forEach(([k,c]) => {
+    const s = scores[k], g = grade(s);
+    const ins = s>=72 ? INSIGHTS[k].h : s>=48 ? INSIGHTS[k].m : INSIGHTS[k].l;
+    panels.innerHTML += `
+      <div class="dim-panel" style="border-left-color:${c.accent}">
+        <div class="dim-head">
+          <div class="dim-left">
+            <span class="ico">${c.icon}</span>
+            <div>
+              <div class="dim-name" style="color:${c.accent}">${c.label}</div>
+              <div class="dim-grade-lbl" style="color:${g.c}">${g.g}</div>
+            </div>
+          </div>
+          <div class="dim-right">
+            <div class="mini-bar"><div class="mini-fill" style="width:${s}%;background:${g.c}"></div></div>
+            <span class="dim-pct" style="color:${g.c}">${s}%</span>
+          </div>
+        </div>
+        <p class="dim-text">${ins}</p>
+      </div>`;
+  });
+
+  /* Action plan */
+  const weakest = Object.entries(scores).sort(([,a],[,b])=>a-b).slice(0,3).map(([k])=>k);
+  let aHTML = `<div class="action-title">💡 Your Priority Action Plan</div>
+    <p class="action-sub">Three areas with the greatest growth opportunity</p>`;
+  weakest.forEach(k => {
+    const c = CATEGORIES[k], g = grade(scores[k]);
+    aHTML += `
+      <div class="action-item">
+        <div class="action-ico" style="background:${c.bg};border-color:${c.accent}40">${c.icon}</div>
+        <div style="flex:1">
+          <div class="action-cat" style="color:${c.accent}">${c.label} · ${scores[k]}%</div>
+          <div class="action-text">${RECS[k]}</div>
+        </div>
+      </div>`;
+  });
+  document.getElementById('actionBox').innerHTML = aHTML;
+
+  setTimeout(() => document.getElementById('results').classList.add('visible'), 100);
+}
+
+function buildNarrative(overall, scores, topCat, lowCat, fn, pos, yc) {
+  const tn = CATEGORIES[topCat[0]].label, ln = CATEGORIES[lowCat[0]].label;
+  const ts = scores['tough'], cs = scores['celebrations'];
+  if (overall >= 85) return `${yc} ${fn} presents as an exceptional marital partner — self-aware, emotionally invested, and genuinely devoted. ${pos} greatest strength is ${tn} (${topCat[1]}%). Even lower-scoring areas reflect a partner committed to honest growth. This is the profile of someone who understands that a great marriage is built daily, one choice at a time.`;
+  if (overall >= 70) return `${yc} ${fn} is a committed and caring spouse with a solid foundation. ${pos} greatest strength lies in ${tn} (${topCat[1]}%). The lower-scoring areas — particularly ${ln} — are not fixed traits but learnable patterns. With focused effort, meaningful improvement is well within reach.`;
+  if (overall >= 55) {
+    let b = `${yc} ${fn} has genuine love for their spouse but is operating on autopilot in several critical areas. While ${tn} is a clear strength, ${ln} needs urgent honest attention.`;
+    if (ts < 55) b += ` The low score in Effort During Tough Times (${ts}%) suggests that when the marriage most needs investment, the response has been withdrawal, harshness, or passivity — a pattern that causes cumulative damage.`;
+    if (cs < 55) b += ` The low score in Joy & Celebrations (${cs}%) indicates the family's warmth and emotional vitality may be quietly depleting. Both patterns are changeable — but require honest acknowledgment first.`;
+    return b;
+  }
+  let b = `${yc} This assessment reveals significant challenges across several dimensions. The profile in ${ln} (${lowCat[1]}%) and related areas points to deeply ingrained patterns — possibly including emotional harshness, financial control, or consistent absence from the family's emotional life.`;
+  if (ts < 50 && cs < 50) b += ` The combination of low effort during difficult periods and minimal investment in family joy creates a profoundly isolating experience for a spouse. These are urgent signals — not character verdicts. They are habits. But they require more than good intentions to change.`;
+  return b;
+}
+</script>
+</body>
+</html>
