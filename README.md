@@ -1,0 +1,2 @@
+# PartnerAssessment
+compatibility check
